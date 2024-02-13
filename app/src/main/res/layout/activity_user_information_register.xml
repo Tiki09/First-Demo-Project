@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".UserInformationRegisterActivity">
+
+    <TextView
+        android:id="@+id/tv_userInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="80dp"
+        android:text="Provide Your Details Here"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/ed_Id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_userInfo"
+        android:layout_marginTop="100dp"
+        android:inputType="text"
+        android:hint="Enter Your Id"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/ed_Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/ed_Id"
+        app:layout_constraintEnd_toEndOf="@id/ed_Id"
+        app:layout_constraintTop_toBottomOf="@+id/ed_Id"
+        android:inputType="textPersonName"
+        android:hint="Enter Your Name"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/ed_Address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/ed_Name"
+        app:layout_constraintEnd_toEndOf="@id/ed_Name"
+        app:layout_constraintTop_toBottomOf="@+id/ed_Name"
+        android:inputType="text"
+        android:hint="Enter Your Address"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/ed_Conatct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/ed_Address"
+        app:layout_constraintEnd_toEndOf="@id/ed_Address"
+        app:layout_constraintTop_toBottomOf="@+id/ed_Address"
+        android:inputType="number"
+        android:hint="Enter Your Contact Number"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/ed_Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/ed_Conatct"
+        app:layout_constraintEnd_toEndOf="@id/ed_Conatct"
+        app:layout_constraintTop_toBottomOf="@+id/ed_Conatct"
+        android:inputType="textEmailAddress"
+        android:hint="Enter Your Email"
+        android:textSize="20sp"/>
+
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ed_Email"
+        android:layout_marginTop="100dp"
+        android:text="Submit"
+        android:textSize="20sp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
