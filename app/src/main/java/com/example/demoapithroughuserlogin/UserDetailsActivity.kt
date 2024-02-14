@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demoapithroughuserlogin.adapter.UserDetailsAdapter
 import com.example.demoapithroughuserlogin.databinding.ActivityUserDetailsBinding
@@ -19,7 +20,6 @@ class UserDetailsActivity : AppCompatActivity() {
     }
 
     private lateinit var userAdapter:UserDetailsAdapter
-    private lateinit var userDetailsList:ArrayList<UserDetails>
 
     val viewModel = UserDetailsViewModel()
 
@@ -43,16 +43,17 @@ class UserDetailsActivity : AppCompatActivity() {
 
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == LAUNCH_SECOND_ACTIVITY) {
             if (resultCode == Activity.RESULT_OK) {
                 val result = data?.getParcelableExtra<UserDetails>("result")
-                result?.let { viewModel.userList.add(it) }
+                result?.let {
+                    viewModel.userList.add(it)
+                }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                // Write your code if there's no result
+                Toast.makeText(this, "request cancelled!", Toast.LENGTH_SHORT).show()
             }
             userAdapter.setData(viewModel.userList)
             binding.rcvVwUserDetails.visibility=View.VISIBLE

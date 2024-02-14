@@ -23,11 +23,12 @@
 
     <EditText
         android:id="@+id/ed_UserName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tv_CreateAccount"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         android:inputType="textPersonName"
         android:hint="Enter Your Name"
@@ -36,11 +37,12 @@
 
     <EditText
         android:id="@+id/ed_MobileNumber"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/ed_UserName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"
         android:inputType="number"
         android:hint="Enter Mobile Number"
         android:textSize="20sp"
@@ -48,11 +50,12 @@
 
     <EditText
         android:id="@+id/ed_Password"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/ed_MobileNumber"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"
         android:inputType="textPassword"
         android:hint="Enter Password"
         android:textSize="20sp"
@@ -60,12 +63,13 @@
 
     <EditText
         android:id="@+id/ed_ConfirmPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/ed_Password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:inputType="textPassword"
+        android:layout_marginHorizontal="20dp"
         android:hint="Confirm Your Password"
         android:textSize="20sp"
         />

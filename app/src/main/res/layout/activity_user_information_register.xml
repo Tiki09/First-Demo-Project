@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_userInfo"
         android:layout_marginTop="100dp"
@@ -37,6 +38,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/ed_Id"
         app:layout_constraintEnd_toEndOf="@id/ed_Id"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintTop_toBottomOf="@+id/ed_Id"
         android:inputType="textPersonName"
         android:hint="Enter Your Name"
@@ -48,6 +50,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/ed_Name"
         app:layout_constraintEnd_toEndOf="@id/ed_Name"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintTop_toBottomOf="@+id/ed_Name"
         android:inputType="text"
         android:hint="Enter Your Address"
@@ -61,6 +64,7 @@
         app:layout_constraintEnd_toEndOf="@id/ed_Address"
         app:layout_constraintTop_toBottomOf="@+id/ed_Address"
         android:inputType="number"
+        android:layout_marginHorizontal="20dp"
         android:hint="Enter Your Contact Number"
         android:textSize="20sp"/>
 
@@ -72,6 +76,7 @@
         app:layout_constraintEnd_toEndOf="@id/ed_Conatct"
         app:layout_constraintTop_toBottomOf="@+id/ed_Conatct"
         android:inputType="textEmailAddress"
+        android:layout_marginHorizontal="20dp"
         android:hint="Enter Your Email"
         android:textSize="20sp"/>
 

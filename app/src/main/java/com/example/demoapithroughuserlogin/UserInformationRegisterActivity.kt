@@ -38,8 +38,5 @@ class UserInformationRegisterActivity : AppCompatActivity() {
 
 
     }
-//
-//    interface CallListListener{
-//        fun listData(list:ArrayList<UserDetails>)
-//    }
+
 }

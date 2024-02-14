@@ -7,6 +7,4 @@ class UserDetailsViewModel:ViewModel() {
 
     val userList = mutableListOf<UserDetails>()
 
-
-
 }
