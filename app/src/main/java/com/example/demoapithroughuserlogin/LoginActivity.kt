@@ -3,10 +3,16 @@ package com.example.demoapithroughuserlogin
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import com.example.demoapithroughuserlogin.database.SignUpDatabase
 import com.example.demoapithroughuserlogin.databinding.ActivityLoginBinding
-import com.example.demoapithroughuserlogin.databinding.ActivitySignUpBinding
 import com.example.demoapithroughuserlogin.viewmodel.LoginViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
@@ -16,9 +22,12 @@ class LoginActivity : AppCompatActivity() {
 
     val loginViewModel = LoginViewModel()
 
+    private lateinit var database: SignUpDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        database = SignUpDatabase.getDatabse(this)
 
         binding.tvNoAccount.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
@@ -42,16 +51,22 @@ class LoginActivity : AppCompatActivity() {
 
             }
 
-            if (loginViewModel.mob == mob && loginViewModel.password == password) {
-                val intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
-            } else {
-                Toast.makeText(this, "please enter valid credentials", Toast.LENGTH_SHORT).show()
+            loginViewModel.loginData(mob, password, database) { isLoggedIn, username, userId ->
+                if (isLoggedIn) {
+                    val intent = Intent(this@LoginActivity, UserDetailsActivity::class.java)
+                    intent.putExtra("name", username)
+                    intent.putExtra("userId", userId)
+                    startActivity(intent)
+                } else {
+                    Log.e("check", "onCreate: login failed ")
+                    Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
+                }
             }
 
         }
 
     }
 
-
 }
+
+

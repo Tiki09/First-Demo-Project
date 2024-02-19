@@ -15,29 +15,33 @@ import com.example.demoapithroughuserlogin.viewmodel.UserDetailsViewModel
 
 class UserDetailsActivity : AppCompatActivity() {
 
-    private val binding:ActivityUserDetailsBinding by lazy {
+    private val binding: ActivityUserDetailsBinding by lazy {
         ActivityUserDetailsBinding.inflate(layoutInflater)
     }
 
-    private lateinit var userAdapter:UserDetailsAdapter
+    private lateinit var userAdapter: UserDetailsAdapter
 
     val viewModel = UserDetailsViewModel()
 
     val LAUNCH_SECOND_ACTIVITY = 1
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-       // initRecyclerView()
-        binding.rcvVwUserDetails.layoutManager=LinearLayoutManager(this)
-        userAdapter= UserDetailsAdapter(viewModel.userList)
-        binding.rcvVwUserDetails.adapter=userAdapter
+        val nameData = intent.getStringExtra("name")
+        binding.tvWelcomeUser.text = "Welcome " + nameData
 
+        val userId = intent.getLongExtra("userId", 0L)
+
+        // initRecyclerView()
+        binding.rcvVwUserDetails.layoutManager = LinearLayoutManager(this)
+        userAdapter = UserDetailsAdapter(viewModel.userList)
+        binding.rcvVwUserDetails.adapter = userAdapter
 
         binding.btnAddDetails.setOnClickListener {
             val intent = Intent(this, UserInformationRegisterActivity::class.java)
+            intent.putExtra("userId", userId)
             startActivityForResult(intent, LAUNCH_SECOND_ACTIVITY)
         }
 
@@ -56,8 +60,8 @@ class UserDetailsActivity : AppCompatActivity() {
                 Toast.makeText(this, "request cancelled!", Toast.LENGTH_SHORT).show()
             }
             userAdapter.setData(viewModel.userList)
-            binding.rcvVwUserDetails.visibility=View.VISIBLE
-            Log.e("check","${viewModel.userList}")
+            binding.rcvVwUserDetails.visibility = View.VISIBLE
+           // Log.e("check", "${viewModel.userList}")
         }
     }
 

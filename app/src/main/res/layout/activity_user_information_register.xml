@@ -64,6 +64,7 @@
         app:layout_constraintEnd_toEndOf="@id/ed_Address"
         app:layout_constraintTop_toBottomOf="@+id/ed_Address"
         android:inputType="number"
+        android:maxLength="10"
         android:layout_marginHorizontal="20dp"
         android:hint="Enter Your Contact Number"
         android:textSize="20sp"/>
