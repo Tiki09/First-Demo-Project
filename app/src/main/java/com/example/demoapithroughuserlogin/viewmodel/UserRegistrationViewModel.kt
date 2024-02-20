@@ -3,28 +3,30 @@ package com.example.demoapithroughuserlogin.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.demoapithroughuserlogin.database.SignUpDatabase
+import com.example.demoapithroughuserlogin.repository.UserRegistrationRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
-class UserRegistrationViewModel : ViewModel() {
-
+class UserRegistrationViewModel(
+    private val userRegistrationRepository: UserRegistrationRepository
+) : ViewModel() {
 
     fun isNameValidate(name: String): Boolean {
-        if (name.length >= 3) {
-            return true
+        return if (name.length >= 3) {
+            true
         } else {
-            return false
+            false
         }
     }
 
     fun isMobValidate(mob: String): Boolean {
-        if (mob.isEmpty()) {
-            return false
+        return if (mob.isEmpty()) {
+            false
         } else if (mob.length != 10) {
-            return false
+            false
         } else {
-            return true
+            true
         }
     }
 
@@ -58,10 +60,9 @@ class UserRegistrationViewModel : ViewModel() {
         id: Long,
         address: String,
         email: String,
-        database: SignUpDatabase
     ) {
         viewModelScope.launch {
-            database.signUpDao().updateAddressAndEmail(id, address, email)
+            userRegistrationRepository.updateAddressAndEmail(id, address, email)
 
         }
     }

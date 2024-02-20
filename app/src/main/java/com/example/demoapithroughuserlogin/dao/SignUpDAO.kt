@@ -23,5 +23,5 @@ interface SignUpDAO {
     fun checkMobileNumberExists(mobileNumber: String): Int
 
     @Query("select * from SignUpDetailsEntity")
-    fun getData(): LiveData<UserDetails>
+    fun getData(): LiveData<List<UserDetails>>
 }

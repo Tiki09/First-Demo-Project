@@ -57,7 +57,7 @@
         android:textSize="20sp"/>
 
     <EditText
-        android:id="@+id/ed_Conatct"
+        android:id="@+id/ed_Contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/ed_Address"
@@ -73,9 +73,9 @@
         android:id="@+id/ed_Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/ed_Conatct"
-        app:layout_constraintEnd_toEndOf="@id/ed_Conatct"
-        app:layout_constraintTop_toBottomOf="@+id/ed_Conatct"
+        app:layout_constraintStart_toStartOf="@id/ed_Contact"
+        app:layout_constraintEnd_toEndOf="@id/ed_Contact"
+        app:layout_constraintTop_toBottomOf="@+id/ed_Contact"
         android:inputType="textEmailAddress"
         android:layout_marginHorizontal="20dp"
         android:hint="Enter Your Email"

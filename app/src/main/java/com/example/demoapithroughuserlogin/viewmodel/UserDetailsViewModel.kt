@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.demoapithroughuserlogin.model.UserDetails
 import java.util.regex.Pattern
 
-class UserDetailsViewModel:ViewModel() {
+class UserDetailsViewModel : ViewModel() {
 
     val userList = mutableListOf<UserDetails>()
 

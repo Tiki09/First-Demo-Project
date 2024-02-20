@@ -10,17 +10,16 @@ import kotlinx.coroutines.launch
 
 class AlbumViewModel(
     private val repository: APIRepository
-):ViewModel() {
-    val albumMutableLiveData : MutableLiveData<Album> = MutableLiveData()
+) : ViewModel() {
+    val albumMutableLiveData: MutableLiveData<Album> = MutableLiveData()
 
-    fun fetchAlbumData(){
+    fun fetchAlbumData() {
         viewModelScope.launch {
             try {
                 val album_response = repository.getAlbumData()
                 albumMutableLiveData.value = album_response
-            }
-            catch (e:Exception){
-                Log.e("api", "getAlbumsData: ${e.message}", )
+            } catch (e: Exception) {
+                Log.e("api", "getAlbumsData: ${e.message}")
             }
         }
     }

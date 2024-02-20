@@ -1,5 +1,6 @@
 package com.example.demoapithroughuserlogin.database
 
+import android.app.Application
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -23,7 +24,7 @@ abstract class SignUpDatabase:RoomDatabase() {
                         context.applicationContext,
                         SignUpDatabase::class.java,
                         "sign up_DB"
-                    ) .fallbackToDestructiveMigration()
+                    ) .fallbackToDestructiveMigration() //allows you to make schema changes without writing migration code
                         .allowMainThreadQueries()
                         .build()
                 }

@@ -7,7 +7,7 @@ data class UserDetails(
     val id: String,
     val name: String,
     val address: String,
-    val contact: String,
+    val mobile: String,
     val email: String
 ):Parcelable{
 

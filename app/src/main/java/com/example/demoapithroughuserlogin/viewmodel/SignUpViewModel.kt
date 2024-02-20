@@ -1,43 +1,46 @@
 package com.example.demoapithroughuserlogin.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.demoapithroughuserlogin.database.SignUpDatabase
 import com.example.demoapithroughuserlogin.entity.SignUpDetailsEntity
+import com.example.demoapithroughuserlogin.repository.SignUpRepository
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 
-class SignUpViewModel : ViewModel() {
+class SignUpViewModel(
+    private val signUpRepository: SignUpRepository
+) : ViewModel() {
 
-    val passwordValidation =
-        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}\$\n"
+    val passwordRegex = Regex("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$")
 
     fun isNameValidate(name: String): Boolean {
-        if (name.length >= 3) {
-            return true
+        return if (name.length >= 3) {
+            true
         } else {
-            return false
+            false
         }
     }
 
-
     fun isMobValidate(mob: String): Boolean {
-        if (mob.isEmpty()) {
-            return false
+        return if (mob.isEmpty()) {
+            false
         } else if (mob.length != 10) {
-            return false
+            false
         } else {
-            return true
+            true
         }
     }
 
     fun isPasswordValidate(password: String): Boolean {
         return if (password.isEmpty()) {
             false
-        } else if ((password.length >= 8)
-            && (password.length <= 15)
-        ) {
-            true
-        } else password.equals(passwordValidation)
+        } else if (!((password.length >= 8) && (password.length <= 15))) {
+            false
+        } else {
+            password.matches(passwordRegex)
+        }
     }
 
     fun isBothPasswordAreSame(p1: String, p2: String): Boolean {
@@ -48,11 +51,10 @@ class SignUpViewModel : ViewModel() {
         mobileNumber: String,
         name: String,
         password: String,
-        database: SignUpDatabase,
-        callBack : (Boolean, String, String, Long) -> Unit
-    ){
+        callBack: (Boolean, String, String, Long, String) -> Unit
+    ) {
         viewModelScope.launch {
-            val existingUserCount = database.signUpDao().checkMobileNumberExists(mobileNumber)
+            val existingUserCount = signUpRepository.isMobileNumberExists(mobileNumber)
             if (existingUserCount == 0) {
                 val user = SignUpDetailsEntity(
                     System.currentTimeMillis(),
@@ -60,11 +62,11 @@ class SignUpViewModel : ViewModel() {
                     name = name,
                     pwd = password
                 )
-                database.signUpDao().insertUser(user)
-                callBack(true, "User Inserted", user.name, user.id)
+                signUpRepository.insertUser(user)
+                callBack(true, "User Inserted", user.name, user.id, user.mobile)
                 // message = "User inserted successfully"
             } else {
-                callBack(false,"User with mobile number $mobileNumber already exists","", 0L)
+                callBack(false, "User with mobile number $mobileNumber already exists", "", 0L, "")
             }
         }
     }

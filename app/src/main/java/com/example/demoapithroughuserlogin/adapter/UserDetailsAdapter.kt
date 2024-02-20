@@ -27,7 +27,7 @@ class UserDetailsAdapter(
                 binding.tvId.text=id
                 binding.tvName.text=name
                 binding.tvAddress.text=address
-                binding.tvContact.text=contact.toString()
+                binding.tvContact.text=mobile.toString()
                 binding.tvEmail.text=email
             }
         }

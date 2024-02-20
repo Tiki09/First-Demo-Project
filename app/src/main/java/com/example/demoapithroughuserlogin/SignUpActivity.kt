@@ -1,5 +1,6 @@
 package com.example.demoapithroughuserlogin
 
+import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.demoapithroughuserlogin.database.SignUpDatabase
 import com.example.demoapithroughuserlogin.databinding.ActivitySignUpBinding
-import com.example.demoapithroughuserlogin.entity.SignUpDetailsEntity
+import com.example.demoapithroughuserlogin.repository.SignUpRepository
 import com.example.demoapithroughuserlogin.viewmodel.SignUpViewModel
 
 class SignUpActivity : AppCompatActivity() {
@@ -16,15 +17,13 @@ class SignUpActivity : AppCompatActivity() {
         ActivitySignUpBinding.inflate(layoutInflater)
     }
 
-    val viewModel = SignUpViewModel()
-    lateinit var database: SignUpDatabase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        // Log.e("aaa", "onCreate: ${viewModel.returnString()}")
 
-        database = SignUpDatabase.getDatabse(applicationContext)
+        val database = SignUpDatabase.getDatabse(this)
+        val repository = SignUpRepository(database)
+        val viewModel = SignUpViewModel(repository)
 
         binding.tvAlreadyAccount.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -51,23 +50,23 @@ class SignUpActivity : AppCompatActivity() {
                 viewModel.isPasswordValidate(password) &&
                 viewModel.isBothPasswordAreSame(password, confirmPassword)
             ) {
-               viewModel.insertUserIfNotExists(mob,name,password, database){
-                   isInserted, message, username, userId->
-                   if (isInserted)
-                   {
-                       val intent = Intent(this, UserDetailsActivity::class.java)
-                       intent.putExtra("name",username)
-                       intent.putExtra("userId",userId)
-                       startActivity(intent)
+                viewModel.insertUserIfNotExists(
+                    mob,
+                    name,
+                    password
+                ) { isInserted, message, username, userId, userMobile ->
+                    if (isInserted) {
+                        val intent = Intent(this, UserDetailsActivity::class.java)
+                        intent.putExtra("name", username)
+                        intent.putExtra("userId", userId)
+                        intent.putExtra("userMobile", userMobile)
+                        startActivity(intent)
 
-                       Toast.makeText(this, "$message", Toast.LENGTH_SHORT).show()
-                   }
-                   else{
-                       Toast.makeText(this, "$message", Toast.LENGTH_SHORT).show()
-                   }
-               }
-
-
+                        Toast.makeText(this, "$message", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "$message", Toast.LENGTH_SHORT).show()
+                    }
+                }
 
             } else {
                 Toast.makeText(this, "Can not SignUp", Toast.LENGTH_SHORT).show()
@@ -75,7 +74,5 @@ class SignUpActivity : AppCompatActivity() {
         }
 
     }
-
-
 
 }

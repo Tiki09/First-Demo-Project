@@ -34,6 +34,8 @@ class UserDetailsActivity : AppCompatActivity() {
 
         val userId = intent.getLongExtra("userId", 0L)
 
+        val userMobile = intent.getStringExtra("userMobile")
+
         // initRecyclerView()
         binding.rcvVwUserDetails.layoutManager = LinearLayoutManager(this)
         userAdapter = UserDetailsAdapter(viewModel.userList)
@@ -42,6 +44,8 @@ class UserDetailsActivity : AppCompatActivity() {
         binding.btnAddDetails.setOnClickListener {
             val intent = Intent(this, UserInformationRegisterActivity::class.java)
             intent.putExtra("userId", userId)
+            intent.putExtra("name", nameData)
+            intent.putExtra("userMobile", userMobile)
             startActivityForResult(intent, LAUNCH_SECOND_ACTIVITY)
         }
 
@@ -61,7 +65,7 @@ class UserDetailsActivity : AppCompatActivity() {
             }
             userAdapter.setData(viewModel.userList)
             binding.rcvVwUserDetails.visibility = View.VISIBLE
-           // Log.e("check", "${viewModel.userList}")
+            // Log.e("check", "${viewModel.userList}")
         }
     }
 
